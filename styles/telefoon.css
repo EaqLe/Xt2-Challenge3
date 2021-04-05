@@ -1,0 +1,117 @@
+/*Aangezien mijn ontwerp mobile first is heeft deze CSS geen media query, dit is de standaard weergave op mobiel.*/
+
+* {
+box-sizing: border-box;
+}
+
+body {
+	background-color: black;
+	font-family: din-condensed, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	color: white;
+}
+
+h1, h2, h3 {
+	text-transform: uppercase;
+}
+
+.spacexlogo {
+	width: 50%;
+	margin: auto; /*hierdoor wordt het logo in het midden geplaatst*/
+	display: block; /*centreren via margin auto werkt alleen met een block element*/
+}
+
+.heading {
+	text-align: center;
+	font-size: 23px; /*de fontsize schaalt mee aan de hand van de grote van het scherm*/
+}
+
+#separator {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; } 
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column; 
+  font-size: 30px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.clock, .plaatsvancirkel {
+  padding: 10px;
+  flex: 0 0 auto;
+  width: 100%; /* alle blokken zijn op mobiel 100% breed, hierdoor komen ze onder elkaar te staan */
+  margin-top: 20px;
+}
+
+.clock {
+	font-size: 40px;
+}
+
+
+#cirkel {
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    margin: auto;
+}
+
+.zon {
+	background-color: #ffdd00;
+	border: 5px solid #f1c40f;
+	transition: linear;
+	transition-duration: 2s;
+	animation: slide-in-bottom 3s linear both;
+}
+
+.zonweg {
+	background-color: #ffdd00;
+	border: 5px solid #f1c40f;
+	transition: linear;
+	transition-duration: 2s;
+	animation: slide-out-top 3s linear both;
+}
+
+.maan {
+	background-color: #bdc3c7;
+	border: 5px solid #eaeff2;
+	transition: linear;
+	transition-duration: 2s;
+	animation: slide-in-bottom 3s linear both;
+}
+
+.maanweg {
+	animation: slide-out-top 3s linear both;
+	background-color: #bdc3c7;
+	border: 5px solid #eaeff2;
+	transition: linear;
+	transition-duration: 2s;
+}
+@keyframes slide-in-bottom {
+  0% {
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+@keyframes slide-out-top {
+  0% {
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+            transform: translateY(-1000px);
+    opacity: 0;
+  }
+}

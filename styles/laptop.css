@@ -1,0 +1,16 @@
+@media only screen and (min-width: 1024px) {
+  
+
+.clock, .plaatsvancirkel{
+  padding: 10px;
+  flex: 0 0 auto;
+  width: 100% /*hierdoor komen de blokken opnieuw naast elkaar te staan, ik heb 3 blokken maar de indeling is gemaakt voor 4 blokken. 
+  			 waardoor ik nu 1 "leeg" blok heb. Dit was een bewuste indeling keuze.*/
+}
+ 
+ .heading {
+	text-align: center;
+	font-size: 32px; /*de fontsize schaalt mee aan de hand van de grote van het scherm*/
+}
+
+  }

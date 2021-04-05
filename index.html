@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ITS Clock</title>
+		<script src="scripts/main.js" defer></script>
+		<meta name="viewport" content="width=device-width,initial-scale=1"> <!-- hier worden alle CSS, JS, fonts en het favicon ingeladen. -->
+		<link type="text/css" href="styles/telefoon.css" rel="stylesheet" />
+		<link type="text/css" href="styles/tablet.css" rel="stylesheet" />
+		<link type="text/css" href="styles/laptop.css" rel="stylesheet" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="https://use.typekit.net/awq8dww.css">
+	</head>
+	<body>
+		<div class="flex-logo">
+  			<figure>
+  				<img class="spacexlogo" src="images/spacexlogowhite.png">
+  			</figure>
+  		</div>
+  <h1 class="heading">Interplanetary Transport System Clock</h1>
+<div class="flex-container">
+<!-- Dit is de cirkel die verandert door middel van classes toe te voegen en te removen. Zo wordt hij of de maan of de zon (afhankelijk van het dag deel) --> 
+	<div class="plaatsvancirkel">
+		<div id= "cirkel" class= "">
+    	</div>
+ 	</div>
+
+<!-- Dit is de klok, ik heb per onderdeel (uur, minuut, seconde en de dubbele puntjes) een span aangemaakt. ditzelfde heb ik gedaan voor de datum. -->
+  	<div class="clock"> 
+  			<span id="hours">0</span>
+  			<span id="separator">:</span>
+			<span id="minutes">0</span>
+			<span id="separator">:</span>
+			<span id="seconds">0</span>
+			<div class="date">
+  			<span id="day">Day</span>
+  			<span id="date">Date</span>
+  			<span id="month">Month</span>
+  			</div>
+  	</div> 
+
+
+  		<!-- <div class="flex-item-middle">
+  	
+  </div>
+  <div class="flex-item-right">
+  	<h1 class="heading">Registered Gforces</h1>
+  </div> -->
+</div>
+	</body>
+</html>

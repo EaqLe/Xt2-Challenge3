@@ -1,0 +1,21 @@
+@media only screen and (min-width: 768px) {
+  
+.flex-container {
+  display: flex;
+  font-size: 30px;
+  text-align: center;
+  flex-direction: row; /*hierdoor komen de blokken naast elkaar te staan in plaats van onder elkaar*/
+}
+
+.clock, .plaatsvancirkel{
+  padding: 10px;
+  flex: 0 0 auto;
+  width: 100%; /*doordat deze beide blokken een breedte van 50% hebben komen ze naast elkaar te staan*/
+}
+ 
+ .heading {
+	text-align: center;
+	font-size: 28px; /*de fontsize schaalt mee aan de hand van de grote van het scherm*/
+}
+
+  }
