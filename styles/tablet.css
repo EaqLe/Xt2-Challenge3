@@ -7,15 +7,25 @@
   flex-direction: row; /*hierdoor komen de blokken naast elkaar te staan in plaats van onder elkaar*/
 }
 
-.clock, .plaatsvancirkel{
+.weatherbox, .mapbox{
   padding: 10px;
   flex: 0 0 auto;
-  width: 100%; /*doordat deze beide blokken een breedte van 50% hebben komen ze naast elkaar te staan*/
+  width: 50%; /*doordat deze beide blokken een breedte van 50% hebben komen ze naast elkaar te staan*/
+}
+
+.landingbox {
+  padding: 10px;
+  flex: 0 0 auto;
+  width: 100%; /*doordat dit  blok een breedte van 100% heeft komt hij boven de andere te staan*/
 }
  
  .heading {
 	text-align: center;
 	font-size: 28px; /*de fontsize schaalt mee aan de hand van de grote van het scherm*/
 }
+
+#map {
+  height: 52vh;
+  width: 46vw;
 
   }

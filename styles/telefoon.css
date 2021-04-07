@@ -36,21 +36,37 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.mapbox, .weatherbox {
+.mapbox, .weatherbox, .landingbox{
   padding: 10px;
   flex: 0 0 auto;
   width: 100%; /* alle blokken zijn op mobiel 100% breed, hierdoor komen ze onder elkaar te staan */
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-.clock {
-	font-size: 40px;
+.landingbtn {
+	background-color:black;
+    color: white;
+    font-family: din-condensed, sans-serif;
+    font-weight: 400;
+	font-style: normal;
+    border: white 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.landingbtn:hover {
+    color: grey;
+    border: grey 1px solid;
+    transition: linear;
+    transition-duration: 100ms;
 }
 
 
 #map {
-  height: 90vh;
+  height: 52vh;
   width: 90vw;
+  border-radius: 5px;
 }
 
 .popuptext {

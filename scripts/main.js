@@ -12,7 +12,7 @@ var map = new mapboxgl.Map({
 
   // Positioning the map on a certain longitute + latitude and zooming in
   center: center,
-  zoom: 5,
+  zoom: 3.5,
 });
 
 

@@ -1,13 +1,20 @@
 @media only screen and (min-width: 1024px) {
-  
+  .flex-container {
+  flex-direction: row-reverse; /*hierdoor komen de blokken in omgekeerde volgorde te staan*/
+}
 
-.clock, .plaatsvancirkel{
+.weatherbox, .mapbox {
   padding: 10px;
   flex: 0 0 auto;
-  width: 100% /*hierdoor komen de blokken opnieuw naast elkaar te staan, ik heb 3 blokken maar de indeling is gemaakt voor 4 blokken. 
-  			 waardoor ik nu 1 "leeg" blok heb. Dit was een bewuste indeling keuze.*/
+  width: 50% /*hierdoor komen de blokken met de map en het weer naast elkaar te staan*/
 }
  
+.landingbox {
+  padding: 10px;
+  flex: 0 0 auto;
+  width: 100% /*doordat dit  blok een breedte van 100% heeft komt hij boven de andere te staan*/
+}
+
  .heading {
 	text-align: center;
 	font-size: 32px; /*de fontsize schaalt mee aan de hand van de grote van het scherm*/
