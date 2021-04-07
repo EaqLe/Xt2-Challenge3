@@ -27,13 +27,6 @@ h1, h2, h3 {
 	font-size: 23px; /*de fontsize schaalt mee aan de hand van de grote van het scherm*/
 }
 
-#separator {
-  animation: blinker 1s linear infinite;
-}
-
-@keyframes blinker {  
-  50% { opacity: 0; } 
-}
 
 .flex-container {
   display: flex;
@@ -43,7 +36,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.clock, .plaatsvancirkel {
+.mapbox, .weatherbox {
   padding: 10px;
   flex: 0 0 auto;
   width: 100%; /* alle blokken zijn op mobiel 100% breed, hierdoor komen ze onder elkaar te staan */
@@ -55,63 +48,11 @@ h1, h2, h3 {
 }
 
 
-#cirkel {
-    height: 150px;
-    width: 150px;
-    border-radius: 100%;
-    margin: auto;
+#map {
+  height: 90vh;
+  width: 90vw;
 }
 
-.zon {
-	background-color: #ffdd00;
-	border: 5px solid #f1c40f;
-	transition: linear;
-	transition-duration: 2s;
-	animation: slide-in-bottom 3s linear both;
-}
-
-.zonweg {
-	background-color: #ffdd00;
-	border: 5px solid #f1c40f;
-	transition: linear;
-	transition-duration: 2s;
-	animation: slide-out-top 3s linear both;
-}
-
-.maan {
-	background-color: #bdc3c7;
-	border: 5px solid #eaeff2;
-	transition: linear;
-	transition-duration: 2s;
-	animation: slide-in-bottom 3s linear both;
-}
-
-.maanweg {
-	animation: slide-out-top 3s linear both;
-	background-color: #bdc3c7;
-	border: 5px solid #eaeff2;
-	transition: linear;
-	transition-duration: 2s;
-}
-@keyframes slide-in-bottom {
-  0% {
-            transform: translateY(1000px);
-    opacity: 0;
-  }
-  100% {
-            transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-
-@keyframes slide-out-top {
-  0% {
-            transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-            transform: translateY(-1000px);
-    opacity: 0;
-  }
+.popuptext {
+	color:black;
 }

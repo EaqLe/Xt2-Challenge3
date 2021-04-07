@@ -1,96 +1,172 @@
-function klok () {
-	
-	var today = new Date();
-	var hours = today.getHours();
-	var minutes = today.getMinutes();
-	var seconds = today.getSeconds();
-	var months = new Array('januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december');
-	var days = new Array('Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag');
+// Api key voor Mapbox
+mapboxgl.accessToken = 'pk.eyJ1IjoiZWFxbGUiLCJhIjoiY2tuNmc1Z3oyMDY0dTJ3cncxc2MxZTk2MCJ9.V1ZS-Z0RdgidnIFymKJ_fQ';
 
-	//gooit een 0 voor uren kleiner dan 10
-	if (hours < 10){
-		hours = '0' + hours;
-	}
-	//gooit een 0 voor minuten kleiner dan 10
-	if (minutes < 10){
-		minutes = '0' + minutes;
-	}
-	//gooit een 0 voor seconden kleiner dan 10
-	if (seconds < 10){
-		seconds = '0' + seconds;
-	}
+// Api key voor openWeatherMap
+var openWeatherMapUrl = 'https://api.openweathermap.org/data/2.5/weather';
+var openWeatherMapUrlApiKey = '0390daa8a38c5a1e9f2ff77491c72abc';
+var center = [-89.27957931852698, 25.9563407427604];
+// Initialate map
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/satellite-streets-v11',
 
-	//Dit moet eigenlijk veranderen per dag deel kreeg het alleen niet voor elkaar om het om te bouwen naar uren :(
-	// nu verandert het per aantal seconde )
-
-	 if (seconds >= 20 && seconds <= 22){
-        document.getElementById('cirkel').classList.remove('maan');
-        document.getElementById('cirkel').classList.add('maanweg');
-    } else if (seconds >= 23 && seconds <= 50){
-        document.getElementById('cirkel').classList.remove('maanweg');
-        document.getElementById('cirkel').classList.add('zon');
-    } else if (seconds >= 51 && seconds <= 53){
-        document.getElementById('cirkel').classList.remove('zon');
-        document.getElementById('cirkel').classList.add('zonweg');
-    } else {
-        document.getElementById('cirkel').classList.remove('zonweg');
-        document.getElementById('cirkel').classList.add('maan');
-    }
+  // Positioning the map on a certain longitute + latitude and zooming in
+  center: center,
+  zoom: 5,
+});
 
 
-// Hieronder ziet u de poging om de code om te bouwen naar uren, helaas lukte dit niet :( )
+var nav = new mapboxgl.NavigationControl();
+map.addControl(nav, 'top-right');
 
-  // if (hours > 5 && hours < 7 ){
-	 // 	if (minutes >= 0 && minutes < 1 ) {
-	 // 	    if (seconds >= 0 && seconds < 1) {
-  //       document.getElementById('cirkel').classList.remove('maan');
-  //       document.getElementById('cirkel').classList.add('maanweg');
-	 // 	    }
-	 // 	}
+var popup = new mapboxgl.Popup().setHTML('<h3 class="popuptext">Landingzone #1</h3>');
+var popup2 = new mapboxgl.Popup().setHTML('<h3 class="popuptext">Landingzone #2</h3>');
+var popup3 = new mapboxgl.Popup().setHTML('<h3 class="popuptext">Landingzone #3</h3>');
 
-	 //  else if (hours > 5 && hours < 7 ){
-	 // 	if (minutes >= 0 && minutes < 1 ) {
-	 // 	    if (seconds > 2  && seconds < 4) {
-  //       document.getElementById('cirkel').classList.remove('maanweg');
-  //       document.getElementById('cirkel').classList.add('zon');
-	 // 	    }
-	 // 	}
+var landingzone1 = [-97.15730266075111, 25.99736621515351];
+var landingzone2 = [-80.52838499909618, 28.458495322340553];
+var landingzone3 = [-89.40672969259955, 28.93567089020882];
 
-  //   } 
+// Adding a marker based on lon lat coordinates
+var marker = new mapboxgl.Marker({
+	color: "red"})
+  .setLngLat(landingzone1)
+  .setPopup(popup)
+  .addTo(map);
+
+var marker2 = new mapboxgl.Marker({
+	color: "blue"})
+  .setLngLat(landingzone2)
+  .setPopup(popup2)
+  .addTo(map);
+
+  var marker3 = new mapboxgl.Marker({
+  	color: "green"})
+  .setLngLat(landingzone3)
+  .setPopup(popup3)
+  .addTo(map);
+
+//------------Onclicks voor de knoppen
+
+document.getElementById('knop1').onclick = function() {
+map.flyTo({
+center: landingzone1,
+speed: 1,
+zoom: 10,
+essential: true // this animation is considered essential with respect to prefers-reduced-motion
+});
+
+getWeatherZone1();
+
+};
+
+document.getElementById('knop2').onclick = function() {
+map.flyTo({
+center: landingzone2,
+speed: 1,
+zoom: 10,
+essential: true // this animation is considered essential with respect to prefers-reduced-motion
+});
+
+getWeatherZone2();
+
+};
+
+document.getElementById('knop3').onclick = function() {
+map.flyTo({
+center: landingzone3,
+speed: 1,
+zoom: 10,
+essential: true // this animation is considered essential with respect to prefers-reduced-motion
+});
+
+getWeatherZone3();
+
+};
+
+// Weathermap
+function getWeatherZone1 () {
+
+var request = 'https://api.openweathermap.org/data/2.5/weather?lat=' + landingzone1[1] + '&lon=' + landingzone1[0] + '&appid=0390daa8a38c5a1e9f2ff77491c72abc'
+// get current weather
+fetch(request)
+
+// parse response to JSON format
+.then(function(responseWeather) {
+return responseWeather.json();
+})
+
+// do something with response
+.then(function(responseWeather) {
+// show full JSON object
+var weatherBox = document.getElementById('weather');
+var degC = Math.floor(responseWeather.main.temp - 273.15);
+weatherBox.innerHTML = degC + '&#176;C <br><img src="https://openweathermap.org/img/wn/' + responseWeather.weather[0].icon + '@2x.png"><br>' +  responseWeather.weather[0].description;
+});
+};
+
+function getWeatherZone2 () {
+
+var request = 'https://api.openweathermap.org/data/2.5/weather?lat=' + landingzone2[1] + '&lon=' + landingzone2[0] + '&appid=0390daa8a38c5a1e9f2ff77491c72abc'
+// get current weather
+fetch(request)
+
+// parse response to JSON format
+.then(function(responseWeather) {
+return responseWeather.json();
+})
+
+// do something with response
+.then(function(responseWeather) {
+// show full JSON object
+var weatherBox = document.getElementById('weather');
+var degC = Math.floor(responseWeather.main.temp - 273.15);
+weatherBox.innerHTML = degC + '&#176;C <br><img src="https://openweathermap.org/img/wn/' + responseWeather.weather[0].icon + '@2x.png"><br>' +  responseWeather.weather[0].description;
+});
+};
+
+function getWeatherZone3 () {
+
+var request = 'https://api.openweathermap.org/data/2.5/weather?lat=' + landingzone3[1] + '&lon=' + landingzone3[0] + '&appid=0390daa8a38c5a1e9f2ff77491c72abc'
+// get current weather
+fetch(request)
+
+// parse response to JSON format
+.then(function(responseWeather) {
+return responseWeather.json();
+})
+
+// do something with response
+.then(function(responseWeather) {
+// show full JSON object
+var weatherBox = document.getElementById('weather');
+var degC = Math.floor(responseWeather.main.temp - 273.15);
+weatherBox.innerHTML = degC + '&#176;C <br><img src="https://openweathermap.org/img/wn/' + responseWeather.weather[0].icon + '@2x.png"><br>' +  responseWeather.weather[0].description;
+});
+};
+
+function getWeather () {
+
+var request = 'https://api.openweathermap.org/data/2.5/weather?lat=' + center[1] + '&lon=' + center[0] + '&appid=0390daa8a38c5a1e9f2ff77491c72abc'
+// get current weather
+fetch(request)
+
+// parse response to JSON format
+.then(function(responseWeather) {
+return responseWeather.json();
+})
+
+// do something with response
+.then(function(responseWeather) {
+// show full JSON object
+var weatherBox = document.getElementById('weather');
+var degC = Math.floor(responseWeather.main.temp - 273.15);
+weatherBox.innerHTML = degC + '&#176;C <br><img src="https://openweathermap.org/img/wn/' + responseWeather.weather[0].icon + '@2x.png"><br>' +  responseWeather.weather[0].description;
+});
+};
+
+getWeather();
 
 
-  //    else if (hours > 17 && hours < 19 ){
-	 // 	if (minutes >= 0 && minutes < 1 ) {
-	 // 	    if (seconds >= 0  && seconds < 1) {
-  //       document.getElementById('cirkel').classList.remove('zon');
-  //       document.getElementById('cirkel').classList.add('zonweg');
-	 // 	    }
-	 // 	}
-
-  //   } 
-
-    
-  //    else if (hours > 17 && hours < 19 ){
-	 // 	if (minutes >= 0 && minutes < 1 ) {
-	 // 	    if (seconds >= 1  && seconds < 3) {
-  //       document.getElementById('cirkel').classList.remove('zonweg');
-  //       document.getElementById('cirkel').classList.add('maan');
-	 // 	    }
-	 // 	}
-
-  //   }
-
-	document.getElementById('hours').innerHTML = hours;
-	document.getElementById('minutes').innerHTML = minutes;
-	document.getElementById('seconds').innerHTML = seconds;
-
-	document.getElementById('month').innerHTML = months[today.getMonth()]; // Januari is maand 0
-	document.getElementById('date').innerHTML = today.getDate();
-	document.getElementById('day').innerHTML = days[today.getDay()]; // Zondag is dag 0
-
-}
-
-klok();
-setInterval(klok, 1000);
 
 
