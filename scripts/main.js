@@ -4,8 +4,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZWFxbGUiLCJhIjoiY2tuNmc1Z3oyMDY0dTJ3cncxc2MxZ
 // Api key voor openWeatherMap
 var openWeatherMapUrl = 'https://api.openweathermap.org/data/2.5/weather';
 var openWeatherMapUrlApiKey = '0390daa8a38c5a1e9f2ff77491c72abc';
-var center = [-89.27957931852698, 25.9563407427604];
-// Initialate map
+var center = [-89.27957931852698, 25.9563407427604]; //Midden van de map in een variable gezet voor het gemak
+
+// Map aanmaken 
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/satellite-streets-v11',
@@ -23,11 +24,11 @@ var popup = new mapboxgl.Popup().setHTML('<h3 class="popuptext">Landingzone #1</
 var popup2 = new mapboxgl.Popup().setHTML('<h3 class="popuptext">Landingzone #2</h3>');
 var popup3 = new mapboxgl.Popup().setHTML('<h3 class="popuptext">Landingzone #3</h3>');
 
-var landingzone1 = [-97.15730266075111, 25.99736621515351];
-var landingzone2 = [-80.52838499909618, 28.458495322340553];
+var landingzone1 = [-97.15730266075111, 25.99736621515351]; //LngLat van de landingzones in variablen gezet hierdoor kan ik ze ook gebruiken om het weer op te halen
+var landingzone2 = [-80.52838499909618, 28.458495322340553];  
 var landingzone3 = [-89.40672969259955, 28.93567089020882];
 
-// Adding a marker based on lon lat coordinates
+// Marker toevoegen op de map voor iedere landingzone
 var marker = new mapboxgl.Marker({
 	color: "red"})
   .setLngLat(landingzone1)
@@ -84,11 +85,11 @@ getWeatherZone3();
 
 };
 
-// Weathermap
+// Weathermap -- per zone heb ik een function aangemaakt om voor die locatie het weer op te halen, deze functie wordt uitgevoerd bij een onclick
 function getWeatherZone1 () {
 
 var request = 'https://api.openweathermap.org/data/2.5/weather?lat=' + landingzone1[1] + '&lon=' + landingzone1[0] + '&appid=0390daa8a38c5a1e9f2ff77491c72abc'
-// get current weather
+// Haal het weer op, doordat de LngLat in een variable staat kan ik deze hier gebruiken
 fetch(request)
 
 // parse response to JSON format
@@ -108,7 +109,7 @@ weatherBox.innerHTML = degC + '&#176;C <br><img src="https://openweathermap.org/
 function getWeatherZone2 () {
 
 var request = 'https://api.openweathermap.org/data/2.5/weather?lat=' + landingzone2[1] + '&lon=' + landingzone2[0] + '&appid=0390daa8a38c5a1e9f2ff77491c72abc'
-// get current weather
+// Haal het weer op, doordat de LngLat in een variable staat kan ik deze hier gebruiken
 fetch(request)
 
 // parse response to JSON format
@@ -128,7 +129,7 @@ weatherBox.innerHTML = degC + '&#176;C <br><img src="https://openweathermap.org/
 function getWeatherZone3 () {
 
 var request = 'https://api.openweathermap.org/data/2.5/weather?lat=' + landingzone3[1] + '&lon=' + landingzone3[0] + '&appid=0390daa8a38c5a1e9f2ff77491c72abc'
-// get current weather
+// Haal het weer op, doordat de LngLat in een variable staat kan ik deze hier gebruiken
 fetch(request)
 
 // parse response to JSON format
@@ -148,7 +149,8 @@ weatherBox.innerHTML = degC + '&#176;C <br><img src="https://openweathermap.org/
 function getWeather () {
 
 var request = 'https://api.openweathermap.org/data/2.5/weather?lat=' + center[1] + '&lon=' + center[0] + '&appid=0390daa8a38c5a1e9f2ff77491c72abc'
-// get current weather
+// Haal het weer op, doordat de LngLat in een variable staat kan ik deze hier gebruiken. Hier haal ik het weer op van het midden van de kaart.
+// in dit geval is dat het midden van de Golf van Mexico. Hierdoor heb ik altijd gegevens om het weer mee te vullen (aangezien de andere pas na een onclick worden uitgevoerd)
 fetch(request)
 
 // parse response to JSON format
